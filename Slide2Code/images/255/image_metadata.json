@@ -1,0 +1,15 @@
+[
+    {
+        "slide_number": 1,
+        "image_index": 1,
+        "coordinates": {
+            "left": 658.1818237304688,
+            "top": 381.81817626953125,
+            "width": 61.81818771362305,
+            "height": 23.705354690551758,
+            "total_width": 720.0,
+            "total_height": 405.0
+        },
+        "image_path": "images/255/image_1.png"
+    }
+]

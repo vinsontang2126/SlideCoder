@@ -1,0 +1,1315 @@
+# Function: `pptx.Presentation`
+
+## Function Name
+
+`pptx.Presentation`
+
+## Function Parameters
+
+- **pptx** (`Union[str, IO[bytes], None]`, optional, default: `None`)
+  - Description: Specifies the source of the presentation.
+    - If a `str`, it represents the file path to a `.pptx` file.
+    - If an `IO[bytes]`, it represents a file-like object containing the `.pptx` file data.
+    - If `None`, loads the built-in default presentation template.
+  - Constraints: The file or stream must be a valid `.pptx` file if provided.
+
+## Function Return Value
+
+- **Type**: `presentation.Presentation`
+- **Description**: A `Presentation` object representing the loaded or newly created PowerPoint presentation.
+
+## Function Python Example
+
+```python
+from pptx import Presentation
+
+# Create a new presentation using the default template
+prs = Presentation()
+
+# Load an existing presentation from a file
+prs = Presentation("existing_presentation.pptx")
+
+# Load a presentation from a file-like object
+from io import BytesIO
+with open("existing_presentation.pptx", "rb") as f:
+    prs = Presentation(BytesIO(f.read()))
+```
+
+## Function Purpose
+
+The `pptx.Presentation` function is the primary entry point for creating or loading a PowerPoint presentation. It initializes a `Presentation` object, which provides access to slides, slide masters, layouts, and other presentation components, enabling programmatic manipulation of presentation content.
+
+########
+
+# Function: `Presentation.save`
+
+## Function Name
+
+`save`
+
+## Function Parameters
+
+- **file** (`Union[str, IO[bytes]]`, required)
+  - Description: The destination for saving the presentation.
+    - If a `str`, it represents the file path where the `.pptx` file will be saved.
+    - If an `IO[bytes]`, it represents a file-like object open for writing bytes.
+  - Constraints: The file path must be writable, and the file-like object must support binary writing.
+
+## Function Return Value
+
+- **Type**: `None`
+- **Description**: The method does not return a value; it saves the presentation to the specified file or stream.
+
+## Function Python Example
+
+```python
+from pptx import Presentation
+
+# Create a new presentation
+prs = Presentation()
+
+# Save to a file path
+prs.save("new_presentation.pptx")
+
+# Save to a file-like object
+from io import BytesIO
+output_stream = BytesIO()
+prs.save(output_stream)
+# Use output_stream.getvalue() to access the saved bytes
+```
+
+## Function Purpose
+
+The `save` method of the `Presentation` class persists the presentation to a `.pptx` file or a file-like object after modifications. It enables users to export the presentation to disk or a stream for further use or distribution.
+
+########
+
+## Function: `Slides.add_slide`
+
+### Function Name
+`add_slide`
+
+### Function Parameters
+- **slide_layout** (`pptx.slide.SlideLayout`, required)
+  - Description: The slide layout from which the new slide inherits its appearance and structure.
+  - Constraints: Must be a valid `SlideLayout` object from the presentation's slide master.
+
+### Function Return Value
+- **Type**: `pptx.slide.Slide`
+- **Description**: A newly created `Slide` object that inherits properties from the specified slide layout.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Access the first slide layout from the first slide master
+slide_layout = prs.slide_layouts[0]
+
+# Add a new slide using the layout
+new_slide = prs.slides.add_slide(slide_layout)
+```
+
+### Function Purpose
+The `add_slide` method of the `Slides` class creates and adds a new slide to the presentation, using the specified slide layout to define its structure and appearance.
+
+########
+
+## Function: `Slides.get`
+
+### Function Name
+`get`
+
+### Function Parameters
+- **slide_id** (`int`, required)
+  - Description: The unique integer identifier of the slide to retrieve.
+- **default** (`Union[pptx.slide.Slide, None]`, optional, default: `None`)
+  - Description: The value to return if no slide with the specified `slide_id` is found.
+
+### Function Return Value
+- **Type**: `Union[pptx.slide.Slide, None]`
+- **Description**: The `Slide` object with the specified `slide_id`, or the `default` value if no slide is found.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Get a slide by its ID (assuming slide_id=256 exists)
+slide = prs.slides.get(256)
+
+# Get a slide with a default value if not found
+slide = prs.slides.get(999, default=None)
+```
+
+### Function Purpose
+The `get` method retrieves a slide from the `Slides` collection by its unique `slide_id`, returning a default value if the slide is not found.
+
+########
+
+## Function: `Slides.index`
+
+### Function Name
+`index`
+
+### Function Parameters
+- **slide** (`pptx.slide.Slide`, required)
+  - Description: The slide object whose index in the slides sequence is to be determined.
+  - Constraints: Must be a valid `Slide` object present in the `Slides` collection.
+
+### Function Return Value
+- **Type**: `int`
+- **Description**: The zero-based index of the specified slide in the slides sequence.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Get the first slide
+slide = prs.slides[0]
+
+# Find its index in the slides collection
+slide_index = prs.slides.index(slide)
+```
+
+### Function Purpose
+The `index` method returns the zero-based position of a given slide in the `Slides` collection, raising a `ValueError` if the slide is not present.
+
+########
+
+## Function: `SlideLayouts.get_by_name`
+
+### Function Name
+`get_by_name`
+
+### Function Parameters
+- **name** (`str`, required)
+  - Description: The name of the slide layout to retrieve.
+- **default** (`Union[pptx.slide.SlideLayout, None]`, optional, default: `None`)
+  - Description: The value to return if no slide layout with the specified name is found.
+
+### Function Return Value
+- **Type**: `Union[pptx.slide.SlideLayout, None]`
+- **Description**: The `SlideLayout` object with the specified name, or the `default` value if not found.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Get a slide layout by name
+layout = prs.slide_layouts.get_by_name("Title Slide")
+
+# Get a slide layout with a default value if not found
+layout = prs.slide_layouts.get_by_name("Nonexistent Layout", default=None)
+```
+
+### Function Purpose
+The `get_by_name` method retrieves a slide layout from the `SlideLayouts` collection by its name, returning a default value if the layout is not found.
+
+########
+
+## Function: `SlideLayouts.index`
+
+### Function Name
+`index`
+
+### Function Parameters
+- **slide_layout** (`pptx.slide.SlideLayout`, required)
+  - Description: The slide layout object whose index in the layouts collection is to be determined.
+  - Constraints: Must be a valid `SlideLayout` object present in the `SlideLayouts` collection.
+
+### Function Return Value
+- **Type**: `int`
+- **Description**: The zero-based index of the specified slide layout in the layouts collection.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Get the first slide layout
+layout = prs.slide_layouts[0]
+
+# Find its index in the slide layouts collection
+layout_index = prs.slide_layouts.index(layout)
+```
+
+### Function Purpose
+The `index` method returns the zero-based position of a given slide layout in the `SlideLayouts` collection, raising a `ValueError` if the layout is not present.
+
+########
+
+## Function: `SlideLayouts.remove`
+
+### Function Name
+`remove`
+
+### Function Parameters
+- **slide_layout** (`pptx.slide.SlideLayout`, required)
+  - Description: The slide layout object to remove from the collection.
+  - Constraints: The slide layout must not be in use by any slides; otherwise, a `ValueError` is raised.
+
+### Function Return Value
+- **Type**: `None`
+- **Description**: The method does not return a value; it removes the specified slide layout from the collection.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Get a slide layout (assuming it's not used by any slides)
+layout = prs.slide_layouts[0]
+
+# Remove the slide layout
+prs.slide_layouts.remove(layout)
+```
+
+### Function Purpose
+The `remove` method removes a specified slide layout from the `SlideLayouts` collection, raising a `ValueError` if the layout is used by any slides.
+
+########
+
+## Function: `SlideShapes.add_chart`
+
+### Function Name
+`add_chart`
+
+### Function Parameters
+- **chart_type** (`XL_CHART_TYPE`, required)
+  - Description: The type of chart to add, specified as a member of the `XL_CHART_TYPE` enumeration.
+- **x** (`Length`, required)
+  - Description: The horizontal position of the chart's top-left corner, in English Metric Units (EMU).
+- **y** (`Length`, required)
+  - Description: The vertical position of the chart's top-left corner, in English Metric Units (EMU).
+- **cx** (`Length`, required)
+  - Description: The width of the chart, in English Metric Units (EMU).
+- **cy** (`Length`, required)
+  - Description: The height of the chart, in English Metric Units (EMU).
+- **chart_data** (`ChartData`, required)
+  - Description: A `ChartData` object containing the categories and series values for the chart.
+
+### Function Return Value
+- **Type**: `Chart`
+- **Description**: A `GraphicFrame` shape object containing the newly added chart. The chart object can be accessed via the `chart` property of the returned `GraphicFrame`.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.chart.data import ChartData
+from pptx.enum.chart import XL_CHART_TYPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Create chart data
+chart_data = ChartData()
+chart_data.categories = ['A', 'B', 'C']
+chart_data.add_series('Series 1', (1, 2, 3))
+
+# Add a chart to the slide
+chart_frame = slide.shapes.add_chart(
+    XL_CHART_TYPE.COLUMN_CLUSTERED,
+    x=Inches(1), y=Inches(1),
+    cx=Inches(4), cy=Inches(3),
+    chart_data
+)
+```
+
+### Function Purpose
+The `add_chart` method adds a chart of the specified type to a slide, positioned and sized as specified, using the provided chart data to populate the chart.
+
+########
+
+## Function: `SlideShapes.add_connector`
+
+### Function Name
+`add_connector`
+
+### Function Parameters
+- **connector_type** (`MSO_CONNECTOR_TYPE`, required)
+  - Description: The type of connector, specified as a member of the `MSO_CONNECTOR_TYPE` enumeration.
+- **begin_x** (`Length`, required)
+  - Description: The x-coordinate of the connector's starting point, in English Metric Units (EMU).
+- **begin_y** (`Length`, required)
+  - Description: The y-coordinate of the connector's starting point, in English Metric Units (EMU).
+- **end_x** (`Length`, required)
+  - Description: The x-coordinate of the connector's ending point, in English Metric Units (EMU).
+- **end_y** (`Length`, required)
+  - Description: The y-coordinate of the connector's ending point, in English Metric Units (EMU).
+
+### Function Return Value
+- **Type**: `Connector`
+- **Description**: A newly created `Connector` shape object with the specified type and endpoints.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.enum.shapes import MSO_CONNECTOR_TYPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a connector to the slide
+connector = slide.shapes.add_connector(
+    MSO_CONNECTOR_TYPE.STRAIGHT,
+    begin_x=Inches(1), begin_y=Inches(1),
+    end_x=Inches(3), end_y=Inches(3)
+)
+```
+
+### Function Purpose
+The `add_connector` method adds a connector shape (e.g., a straight or elbow line) to a slide, connecting two points specified by the begin and end coordinates.
+
+########
+
+## Function: `SlideShapes.add_group_shape`
+
+### Function Name
+`add_group_shape`
+
+### Function Parameters
+- **shapes** (`Iterable[pptx.shapes.base.BaseShape]`, optional, default: `()`)
+  - Description: An iterable of shape objects to initially populate the group shape. If empty, the group shape is created empty.
+
+### Function Return Value
+- **Type**: `pptx.shapes.group.GroupShape`
+- **Description**: A newly created `GroupShape` object, optionally containing the specified shapes.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a group shape
+group_shape = slide.shapes.add_group_shape()
+
+# Add shapes to the group
+group_shape.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE,
+    left=Inches(1), top=Inches(1),
+    width=Inches(1), height=Inches(1)
+)
+```
+
+### Function Purpose
+The `add_group_shape` method creates a group shape on a slide, which acts as a container for other shapes, allowing them to be manipulated as a single unit.
+
+########
+
+## Function: `SlideShapes.add_movie`
+
+### Function Name
+`add_movie`
+
+### Function Parameters
+- **movie_file** (`Union[str, IO[bytes]]`, required)
+  - Description: The path to a video file or a file-like object containing the video data.
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the movie shape's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the movie shape's top-left corner, in English Metric Units (EMU).
+- **width** (`Length`, required)
+  - Description: The width of the movie shape, in English Metric Units (EMU).
+- **height** (`Length`, required)
+  - Description: The height of the movie shape, in English Metric Units (EMU).
+- **poster_frame_image** (`Union[str, IO[bytes], None]`, optional, default: `None`)
+  - Description: The path to an image file or a file-like object to use as the poster frame. If `None`, a default image is used.
+- **mime_type** (`str`, optional, default: `'video/unknown'`)
+  - Description: The MIME type of the video file (e.g., `'video/mp4'`).
+
+### Function Return Value
+- **Type**: `GraphicFrame`
+- **Description**: A `GraphicFrame` shape object containing the movie.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a movie to the slide
+movie_frame = slide.shapes.add_movie(
+    movie_file="sample_video.mp4",
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(3),
+    mime_type="video/mp4"
+)
+```
+
+### Function Purpose
+The `add_movie` method adds a movie shape to a slide, embedding a video file and displaying a poster frame image as a placeholder.
+
+########
+
+## Function: `SlideShapes.add_ole_object`
+
+### Function Name
+`add_ole_object`
+
+### Function Parameters
+- **object_file** (`Union[str, IO[bytes]]`, required)
+  - Description: The path to a file or a file-like object containing the OLE object data (e.g., an Excel file).
+- **prog_id** (`str`, required)
+  - Description: The programmatic identifier for the OLE object (e.g., a member of `pptx.enum.shapes.PROG_ID` or a string like `"Adobe.Exchange.7"`).
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the OLE object's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the OLE object's top-left corner, in English Metric Units (EMU).
+- **width** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The width of the OLE object. If `None` and `prog_id` is in `PROG_ID`, the default icon size is used.
+- **height** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The height of the OLE object. If `None` and `prog_id` is in `PROG_ID`, the default icon size is used.
+- **icon_file** (`Union[str, IO[bytes], None]`, optional, default: `None`)
+  - Description: The path to an image file or a file-like object to use as the icon for the OLE object.
+- **icon_width** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The width of the icon image, in English Metric Units (EMU). Omit unless a custom `icon_file` is provided.
+- **icon_height** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The height of the icon image, in English Metric Units (EMU). Omit unless a custom `icon_file` is provided.
+
+### Function Return Value
+- **Type**: `GraphicFrame`
+- **Description**: A `GraphicFrame` shape object containing the embedded OLE object.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add an OLE object (e.g., an Excel file)
+ole_frame = slide.shapes.add_ole_object(
+    object_file="sample.xlsx",
+    prog_id="Excel.Sheet.12",
+    left=Inches(1), top=Inches(1),
+    width=Inches(2), height=Inches(2)
+)
+```
+
+### Function Purpose
+The `add_ole_object` method embeds an OLE object (e.g., an Excel file) in a slide, displaying it as an icon that can be double-clicked to open the object.
+
+########
+
+## Function: `SlideShapes.add_picture`
+
+### Function Name
+`add_picture`
+
+### Function Parameters
+- **image_file** (`Union[str, IO[bytes]]`, required)
+  - Description: The path to an image file or a file-like object containing the image data.
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the picture's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the picture's top-left corner, in English Metric Units (EMU).
+- **width** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The width of the picture. If `None`, the native image width is used.
+- **height** (`Union[Length, None]`, optional, default: `None`)
+  - Description: The height of the picture. If `None`, the native image height is used.
+
+### Function Return Value
+- **Type**: `Picture`
+- **Description**: A `Picture` shape object containing the image.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a picture to the slide
+picture = slide.shapes.add_picture(
+    image_file="sample_image.jpg",
+    left=Inches(1), top=Inches(1),
+    width=Inches(2), height=Inches(2)
+)
+```
+
+### Function Purpose
+The `add_picture` method adds an image to a slide as a picture shape, with optional scaling to preserve or adjust the aspect ratio.
+
+########
+
+## Function: `SlideShapes.add_shape`
+
+### Function Name
+`add_shape`
+
+### Function Parameters
+- **autoshape_type_id** (`MSO_SHAPE`, required)
+  - Description: The type of auto shape, specified as a member of the `MSO_SHAPE` enumeration (e.g., `MSO_SHAPE.RECTANGLE`).
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the shape's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the shape's top-left corner, in English Metric Units (EMU).
+- **width** (`Length`, required)
+  - Description: The width of the shape, in English Metric Units (EMU).
+- **height** (`Length`, required)
+  - Description: The height of the shape, in English Metric Units (EMU).
+
+### Function Return Value
+- **Type**: `Shape`
+- **Description**: A newly created `Shape` object of the specified auto shape type.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a rectangle shape to the slide
+shape = slide.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE,
+    left=Inches(1), top=Inches(1),
+    width=Inches(2), height=Inches(1)
+)
+```
+
+### Function Purpose
+The `add_shape` method adds an auto shape (e.g., rectangle, oval) to a slide, with the specified position and size.
+
+########
+
+## Function: `SlideShapes.add_table`
+
+### Function Name
+`add_table`
+
+### Function Parameters
+- **rows** (`int`, required)
+  - Description: The number of rows in the table.
+- **cols** (`int`, required)
+  - Description: The number of columns in the table.
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the table's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the table's top-left corner, in English Metric Units (EMU).
+- **width** (`Length`, required)
+  - Description: The width of the table, in English Metric Units (EMU).
+- **height** (`Length`, required)
+  - Description: The height of the table, in English Metric Units (EMU).
+
+### Function Return Value
+- **Type**: `GraphicFrame`
+- **Description**: A `GraphicFrame` shape object containing the table. The `Table` object can be accessed via the `table` property.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a table to the slide
+table_frame = slide.shapes.add_table(
+    rows=3, cols=2,
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(2)
+)
+table = table_frame.table
+```
+
+### Function Purpose
+The `add_table` method adds a table to a slide with the specified number of rows and columns, positioned and sized as specified.
+
+########
+
+## Function: `SlideShapes.add_textbox`
+
+### Function Name
+`add_textbox`
+
+### Function Parameters
+- **left** (`Length`, required)
+  - Description: The x-coordinate of the textbox's top-left corner, in English Metric Units (EMU).
+- **top** (`Length`, required)
+  - Description: The y-coordinate of the textbox's top-left corner, in English Metric Units (EMU).
+- **width** (`Length`, required)
+  - Description: The width of the textbox, in English Metric Units (EMU).
+- **height** (`Length`, required)
+  - Description: The height of the textbox, in English Metric Units (EMU).
+
+### Function Return Value
+- **Type**: `Shape`
+- **Description**: A `Shape` object representing the newly added textbox.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a textbox to the slide
+textbox = slide.shapes.add_textbox(
+    left=Inches(1), top=Inches(1),
+    width=Inches(3), height=Inches(1)
+)
+textbox.text = "Sample Text"
+```
+
+### Function Purpose
+The `add_textbox` method adds a textbox shape to a slide, allowing text to be inserted at the specified position and size.
+
+########
+
+## Function: `SlideShapes.build_freeform`
+
+### Function Name
+`build_freeform`
+
+### Function Parameters
+- **start_x** (`float`, optional, default: `0`)
+  - Description: The x-coordinate of the starting pen position in local coordinates.
+- **start_y** (`float`, optional, default: `0`)
+  - Description: The y-coordinate of the starting pen position in local coordinates.
+- **scale** (`Union[tuple[float, float], float]`, optional, default: `1.0`)
+  - Description: The scale of local coordinates relative to slide coordinates (EMU). Can be a single float or a tuple of (x_scale, y_scale).
+
+### Function Return Value
+- **Type**: `FreeformBuilder`
+- **Description**: A `FreeformBuilder` object for specifying a freeform shape's geometry.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Build a freeform shape
+freeform = slide.shapes.build_freeform(start_x=1000, start_y=1000, scale=Inches(1)/1000)
+freeform.add_line_segments([(2000, 2000), (3000, 1000)])
+shape = freeform.convert_to_shape()
+```
+
+### Function Purpose
+The `build_freeform` method creates a `FreeformBuilder` object to define a custom freeform shape by specifying its starting point and scale.
+
+########
+
+## Function: `SlideShapes.index`
+
+### Function Name
+`index`
+
+### Function Parameters
+- **shape** (`pptx.shapes.base.BaseShape`, required)
+  - Description: The shape object whose index in the shapes collection is to be determined.
+  - Constraints: Must be a valid shape object present in the `SlideShapes` collection.
+
+### Function Return Value
+- **Type**: `int`
+- **Description**: The zero-based index of the specified shape in the shapes collection.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a shape
+shape = slide.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE,
+    left=Inches(1), top=Inches(1),
+    width=Inches(1), height=Inches(1)
+)
+
+# Get the index of the shape
+shape_index = slide.shapes.index(shape)
+```
+
+### Function Purpose
+The `index` method returns the zero-based position of a given shape in the `SlideShapes` collection, raising a `ValueError` if the shape is not present.
+
+########
+
+## Function: `FreeformBuilder.add_line_segments`
+
+### Function Name
+`add_line_segments`
+
+### Function Parameters
+- **vertices** (`Iterable[tuple]`, required)
+  - Description: An iterable of (x, y) coordinate pairs specifying the vertices of the line segments.
+- **close** (`bool`, optional, default: `True`)
+  - Description: Whether to close the contour by connecting the last vertex to the first.
+
+### Function Return Value
+- **Type**: `FreeformBuilder`
+- **Description**: The `FreeformBuilder` object, allowing chained calls.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Build a freeform shape
+freeform = slide.shapes.build_freeform(scale=Inches(1)/1000)
+freeform.add_line_segments([(1000, 1000), (2000, 2000), (3000, 1000)], close=True)
+shape = freeform.convert_to_shape()
+```
+
+### Function Purpose
+The `add_line_segments` method adds straight line segments to a freeform shape by specifying vertices, optionally closing the contour.
+
+########
+
+## Function: `FreeformBuilder.convert_to_shape`
+
+### Function Name
+`convert_to_shape`
+
+### Function Parameters
+- **origin_x** (`Length`, optional, default: `0`)
+  - Description: The x-coordinate of the local coordinate system's origin in slide coordinates (EMU).
+- **origin_y** (`Length`, optional, default: `0`)
+  - Description: The y-coordinate of the local coordinate system's origin in slide coordinates (EMU).
+
+### Function Return Value
+- **Type**: `Shape`
+- **Description**: A `Shape` object representing the freeform shape positioned relative to the specified origin.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Build and convert a freeform shape
+freeform = slide.shapes.build_freeform(scale=Inches(1)/1000)
+freeform.add_line_segments([(1000, 1000), (2000, 2000), (3000, 1000)])
+shape = freeform.convert_to_shape(origin_x=Inches(1), origin_y=Inches(1))
+```
+
+### Function Purpose
+The `convert_to_shape` method converts a `FreeformBuilder` object into a freeform `Shape` object, positioned relative to the specified slide coordinates.
+
+########
+
+## Function: `FreeformBuilder.move_to`
+
+### Function Name
+`move_to`
+
+### Function Parameters
+- **x** (`float`, required)
+  - Description: The x-coordinate in local coordinates to move the pen to without drawing a line.
+- **y** (`float`, required)
+  - Description: The y-coordinate in local coordinates to move the pen to without drawing a line.
+
+### Function Return Value
+- **Type**: `FreeformBuilder`
+- **Description**: The `FreeformBuilder` object, allowing chained calls.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Build a freeform shape with a move_to operation
+freeform = slide.shapes.build_freeform(scale=Inches(1)/1000)
+freeform.move_to(1000, 1000)
+freeform.add_line_segments([(2000, 2000), (3000, 1000)])
+shape = freeform.convert_to_shape()
+```
+
+### Function Purpose
+The `move_to` method repositions the pen in a `FreeformBuilder` to a new starting point without drawing a line, enabling multi-contour freeform shapes.
+
+########
+
+## Function: `Connector.begin_connect`
+
+### Function Name
+`begin_connect`
+
+### Function Parameters
+- **shape** (`pptx.shapes.base.BaseShape`, required)
+  - Description: The shape to connect the beginning of the connector to.
+- **cxn_pt_idx** (`int`, required)
+  - Description: The index of the connection point on the shape (typically 0 for top center, increasing counter-clockwise).
+
+### Function Return Value
+- **Type**: `None`
+- **Description**: The method does not return a value; it connects the connector's beginning to the specified shape.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR_TYPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a shape to connect to
+shape = slide.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE,
+    left=Inches(1), top=Inches(1),
+    width=Inches(1), height=Inches(1)
+)
+
+# Add a connector
+connector = slide.shapes.add_connector(
+    MSO_CONNECTOR_TYPE.STRAIGHT,
+    begin_x=Inches(1), begin_y=Inches(1),
+    end_x=Inches(3), end_y=Inches(3)
+)
+
+# Connect the beginning to the shape
+connector.begin_connect(shape, 0)
+```
+
+### Function Purpose
+The `begin_connect` method attaches the beginning of a connector to a specified connection point on a shape, enabling dynamic connections.
+
+########
+
+## Function: `Connector.end_connect`
+
+### Function Name
+`end_connect`
+
+### Function Parameters
+- **shape** (`pptx.shapes.base.BaseShape`, required)
+  - Description: The shape to connect the end of the connector to.
+- **cxn_pt_idx** (`int`, required)
+  - Description: The index of the connection point on the shape (typically 0 for top center, increasing counter-clockwise).
+
+### Function Return Value
+- **Type**: `None`
+- **Description**: The method does not return a value; it connects the connector's end to the specified shape.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR_TYPE
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a shape to connect to
+shape = slide.shapes.add_shape(
+    MSO_SHAPE.RECTANGLE,
+    left=Inches(3), top=Inches(3),
+    width=Inches(1), height=Inches(1)
+)
+
+# Add a connector
+connector = slide.shapes.add_connector(
+    MSO_CONNECTOR_TYPE.STRAIGHT,
+    begin_x=Inches(1), begin_y=Inches(1),
+    end_x=Inches(3), end_y=Inches(3)
+)
+
+# Connect the end to the shape
+connector.end_connect(shape, 0)
+```
+
+### Function Purpose
+The `end_connect` method attaches the end of a connector to a specified connection point on a shape, enabling dynamic connections.
+
+########
+
+## Function: `ChartPlaceholder.insert_chart`
+
+### Function Name
+`insert_chart`
+
+### Function Parameters
+- **chart_type** (`XL_CHART_TYPE`, required)
+  - Description: The type of chart to insert, specified as a member of the `XL_CHART_TYPE` enumeration.
+- **chart_data** (`ChartData`, required)
+  - Description: A `ChartData` object populated with the categories and series values for the chart.
+
+### Function Return Value
+- **Type**: `PlaceholderGraphicFrame`
+- **Description**: A `PlaceholderGraphicFrame` object containing the newly inserted chart. The chart object can be accessed via the `chart` property of the returned `PlaceholderGraphicFrame`.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.chart.data import ChartData
+from pptx.enum.chart import XL_CHART_TYPE
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide with a chart placeholder
+slide = prs.slides.add_slide(prs.slide_layouts[1])  # Assuming layout 1 has a chart placeholder
+
+# Find the chart placeholder
+chart_placeholder = None
+for shape in slide.shapes:
+    if shape.is_placeholder and shape.placeholder_format.type == 'CHART':
+        chart_placeholder = shape
+        break
+
+# Create chart data
+chart_data = ChartData()
+chart_data.categories = ['A', 'B', 'C']
+chart_data.add_series('Series 1', (1, 2, 3))
+
+# Insert a chart into the placeholder
+chart_frame = chart_placeholder.insert_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, chart_data)
+```
+
+### Function Purpose
+The `insert_chart` method inserts a chart of the specified type into a chart placeholder on a slide, using the provided chart data to populate the chart, maintaining the placeholder's position and size.
+
+########
+
+## Function: `PicturePlaceholder.insert_picture`
+
+### Function Name
+`insert_picture`
+
+### Function Parameters
+- **image_file** (`Union[str, IO[bytes]]`, required)
+  - Description: The path to an image file or a file-like object containing the image data.
+
+### Function Return Value
+- **Type**: `PlaceholderPicture`
+- **Description**: A `PlaceholderPicture` object depicting the image, cropped to fill the entire space of the placeholder.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide with a picture placeholder
+slide = prs.slides.add_slide(prs.slide_layouts[1])  # Assuming layout 1 has a picture placeholder
+
+# Find the picture placeholder
+picture_placeholder = None
+for shape in slide.shapes:
+    if shape.is_placeholder and shape.placeholder_format.type == 'PICTURE':
+        picture_placeholder = shape
+        break
+
+# Insert a picture into the placeholder
+picture = picture_placeholder.insert_picture("sample_image.jpg")
+```
+
+### Function Purpose
+The `insert_picture` method inserts an image into a picture placeholder on a slide, cropping it to fill the placeholder's space while maintaining its position and size.
+
+########
+
+## Function: `TablePlaceholder.insert_table`
+
+### Function Name
+`insert_table`
+
+### Function Parameters
+- **rows** (`int`, required)
+  - Description: The number of rows in the table.
+- **cols** (`int`, required)
+  - Description: The number of columns in the table.
+
+### Function Return Value
+- **Type**: `PlaceholderGraphicFrame`
+- **Description**: A `PlaceholderGraphicFrame` object containing the newly inserted table. The table object can be accessed via the `table` property of the returned `PlaceholderGraphicFrame`.
+
+### Function Python Example
+```python
+from pptx import Presentation
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide with a table placeholder
+slide = prs.slides.add_slide(prs.slide_layouts[1])  # Assuming layout 1 has a table placeholder
+
+# Find the table placeholder
+table_placeholder = None
+for shape in slide.shapes:
+    if shape.is_placeholder and shape.placeholder_format.type == 'TABLE':
+        table_placeholder = shape
+        break
+
+# Insert a table into the placeholder
+table_frame = table_placeholder.insert_table(rows=3, cols=2)
+table = table_frame.table
+```
+
+### Function Purpose
+The `insert_table` method inserts a table with the specified number of rows and columns into a table placeholder on a slide, maintaining the placeholder's position and width while adjusting the height proportionally to the number of rows.
+
+########
+
+## Function: `Table.cell`
+
+### Function Name
+`cell`
+
+### Function Parameters
+- **row_idx** (`int`, required)
+  - Description: The zero-based index of the row containing the cell.
+  - Constraints: Must be a valid row index within the table's row count.
+- **col_idx** (`int`, required)
+  - Description: The zero-based index of the column containing the cell.
+  - Constraints: Must be a valid column index within the table's column count.
+
+### Function Return Value
+- **Type**: `pptx.table._Cell`
+- **Description**: A `_Cell` object representing the table cell at the specified row and column indices.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a table to the slide
+table_frame = slide.shapes.add_table(
+    rows=3, cols=2,
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(2)
+)
+table = table_frame.table
+
+# Access a specific cell
+cell = table.cell(0, 0)
+cell.text = "Top-left cell"
+```
+
+### Function Purpose
+The `cell` method retrieves a specific cell from a table based on its zero-based row and column indices, allowing manipulation of the cell's content and properties.
+
+########
+
+## Function: `Table.iter_cells`
+
+### Function Name
+`iter_cells`
+
+### Function Parameters
+- None
+  - Description: This method takes no parameters.
+
+### Function Return Value
+- **Type**: `Iterator[pptx.table._Cell]`
+- **Description**: An iterator yielding `_Cell` objects for each cell in the table, in left-to-right, top-to-bottom order.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a table to the slide
+table_frame = slide.shapes.add_table(
+    rows=2, cols=2,
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(2)
+)
+table = table_frame.table
+
+# Iterate over all cells
+for cell in table.iter_cells():
+    cell.text = "Sample text"
+```
+
+### Function Purpose
+The `iter_cells` method provides an iterator to traverse all cells in a table in a left-to-right, top-to-bottom order, enabling batch processing or modification of cell contents.
+
+########
+
+## Function: `_Cell.merge`
+
+### Function Name
+`merge`
+
+### Function Parameters
+- **other_cell** (`pptx.table._Cell`, required)
+  - Description: Another cell in the same table that defines the opposite corner of the merge range.
+  - Constraints: Must be in the same table as the calling cell, and the specified range must not contain already merged cells.
+
+### Function Return Value
+- **Type**: `None`
+- **Description**: The method does not return a value; it merges the cells in the specified range into a single cell.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a table to the slide
+table_frame = slide.shapes.add_table(
+    rows=3, cols=3,
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(2)
+)
+table = table_frame.table
+
+# Merge cells from (0,0) to (1,1)
+top_left_cell = table.cell(0, 0)
+bottom_right_cell = table.cell(1, 1)
+top_left_cell.merge(bottom_right_cell)
+```
+
+### Function Purpose
+The `merge` method combines a range of table cells into a single merged cell, defined by the calling cell and another cell as opposite corners, useful for creating headers or spanning content across multiple grid cells.
+
+########
+
+## Function: `_Cell.split`
+
+### Function Name
+`split`
+
+### Function Parameters
+- None
+  - Description: This method takes no parameters.
+  - Constraints: The calling cell must be a merge-origin cell (test with `is_merge_origin`).
+
+### Function Return Value
+- **Type**: `None`
+- **Description**: The method does not return a value; it unmerges the cell, restoring individual cells for each grid cell previously spanned.
+
+### Function Python Example
+```python
+from pptx import Presentation
+from pptx.util import Inches
+
+# Load a presentation
+prs = Presentation()
+
+# Access a slide
+slide = prs.slides.add_slide(prs.slide_layouts[0])
+
+# Add a table to the slide
+table_frame = slide.shapes.add_table(
+    rows=3, cols=3,
+    left=Inches(1), top=Inches(1),
+    width=Inches(4), height=Inches(2)
+)
+table = table_frame.table
+
+# Merge cells
+top_left_cell = table.cell(0, 0)
+bottom_right_cell = table.cell(1, 1)
+top_left_cell.merge(bottom_right_cell)
+
+# Split the merged cell
+if top_left_cell.is_merge_origin:
+    top_left_cell.split()
+```
+
+### Function Purpose
+The `split` method unmerges a merge-origin cell, restoring the individual cells that were previously combined, allowing each grid cell to be edited separately.
+
+########
+

@@ -1,0 +1,163 @@
+Auto Shape
+An auto shape is a predefined, customizable shape in PowerPoint, such as a rectangle, ellipse, or block arrow, with approximately 180 variations. Auto shapes can have a fill, outline, and contain text. Some include adjustable features, indicated by yellow diamond handles (e.g., to modify the corner radius of a rounded rectangle). A text box is a specific type of auto shape, typically rectangular, with no default fill or outline.
+
+########
+
+Picture
+A picture in PowerPoint refers to a raster image, such as a photograph or clip art, treated as a distinct shape type with unique behaviors compared to auto shapes. Note that an auto shape can have a picture fill, where an image serves as the shape’s background instead of a color or gradient, but this is a separate feature.
+
+########
+
+Graphic Frame
+A graphic frame is a container that automatically appears in a PowerPoint file when adding graphical objects like tables, charts, SmartArt diagrams, or media clips. It cannot be inserted independently and typically requires no direct interaction from the user.
+
+########
+
+Group Shape
+A group shape is created when multiple shapes in PowerPoint are grouped, enabling them to be selected, moved, resized, or filled as a single unit. The group shape is only visible through its bounding box when selected, containing the individual member shapes.
+
+########
+
+Line/Connector
+Lines are linear shapes distinct from auto shapes. Some lines, known as connectors, can attach to other shapes and remain connected when those shapes are moved. Connectors are not yet fully supported in some contexts, but they are valuable for creating dynamic diagrams.
+
+########
+
+Content Part
+A content part involves embedding external XML data, such as SVG, within a PowerPoint presentation. PowerPoint itself does not actively utilize content parts, and they can generally be ignored without impacting functionality.
+
+########
+
+PowerPoint Slide Layout
+A slide layout serves as a template for a PowerPoint slide, defining its structure and formatting. Elements on the slide layout "show through" to slides created from it, and formatting choices made on the layout are inherited, ensuring a consistent, professional appearance across a presentation.
+
+########
+
+Inheritance
+Slide layouts are based on a slide master, which sets presentation-wide formatting. Layout-specific formatting is applied on individual slide layouts, allowing for tailored designs within a unified theme.
+
+########
+
+Multiple Slide Masters
+While a presentation typically uses one slide master, multiple slide masters are supported for advanced customization (not covered here).
+
+########
+
+Predefined Layouts
+PowerPoint themes include approximately nine slide layouts, such as Title, Title and Content, Title Only, and Blank.
+
+########
+
+Placeholders
+Slide layouts contain zero or more placeholders—preformatted areas for content like titles, multi-level bulleted lists, images, or other objects. Most layouts include at least one placeholder.
+
+########
+
+Text Placeholders
+Title: Displays the slide’s main heading.
+Center Title: A centered title, typically used for emphasis.
+Subtitle: Holds secondary text below the title.
+Body: Contains text, often formatted as bulleted lists for a “word chart” slide. Accepts text only.
+
+########
+
+Multi-Purpose Placeholder
+Content: The most versatile placeholder, used for slide body content. When empty, it displays six buttons for inserting a table, chart, SmartArt, picture, clip art, or media clip.
+
+########
+
+Image Placeholders
+Picture: Allows insertion of a raster image via a file chooser.
+Clip Art: Similar to Picture but opens the clip art gallery for image selection. Behaves identically to Picture once populated.
+
+########
+
+Graphical Content Placeholders
+Chart: Facilitates insertion of a chart (e.g., bar, pie).
+Table: Allows insertion of a formatted table.
+SmartArt: Supports insertion of a SmartArt diagram for visual representation of information.
+
+########
+
+Media Placeholder
+Media Clip: Enables insertion of a video or audio file.
+
+########
+
+Slide Metadata Placeholders
+Date: Displays the presentation date, typically on slide masters or layouts.
+Footer: Holds footer text, often for presentation or organization details.
+Slide Number: Shows the slide’s sequence number. These placeholders (Date, Footer, Slide Number) are common on slide masters, Notes Master, and Handout Master but may not function as expected by users.
+
+########
+
+Specialized Placeholders
+Header: Valid only on Notes Master and Handout Master for adding header text.
+Vertical Body: Accepts text for vertically oriented languages (e.g., Japanese).
+Vertical Object: Holds non-text content for vertical layouts.
+Vertical Title: Displays a title in a vertical orientation.
+
+########
+
+Unpopulated State
+Appearance: Displays customizable prompt text. Rich-content placeholders (e.g., Content, Picture) also show content insertion buttons (e.g., for tables, charts, or images).
+Behavior: Ready to accept content based on the placeholder type.
+
+########
+
+Populated State
+Text-Only Placeholders: Enter populated mode when the first character is entered. Revert to unpopulated mode when the last character is deleted.
+Rich-Content Placeholders: Enter populated mode when content (e.g., a picture, chart) is inserted. Revert to unpopulated mode when the content is deleted.
+Deletion Process: Deleting a populated placeholder requires two steps:
+The first delete removes the content, restoring the unpopulated state.
+A second delete removes the placeholder itself.
+Restoration: A deleted placeholder can be restored by reapplying the slide layout.
+
+########
+
+Placeholder Categories
+Slide Master Placeholders: Serve as inheritees, providing default properties to slide layouts. They do not inherit from other placeholders.
+Slide Layout Placeholders: Act as both inheritors (from slide master placeholders) and inheritees (to slide placeholders). They inherit properties from a master placeholder of the same type (e.g., Title, Body).
+Slide Placeholders: Serve as inheritors, deriving properties from a layout placeholder with the same index (idx) value. They do not pass properties to other placeholders.
+
+########
+
+Inheritance Mechanics
+Slide Layout Inheritance: A layout placeholder inherits properties from a slide master placeholder of the same type (e.g., a Title placeholder on a layout inherits from a Title placeholder on the master).
+Slide Inheritance: A slide placeholder inherits properties from a layout placeholder with the same idx value, ensuring consistent placement and formatting.
+Inherited Properties: Include position, size, fill, line, and font. Any directly applied formatting on a placeholder overrides the inherited values.
+Resetting Formatting: Directly applied formatting can be removed by reapplying the slide layout, restoring inherited properties.
+
+########
+
+Placeholder Shape
+A shape on a PowerPoint slide that inherits its properties (e.g., position, size, formatting) from a corresponding layout placeholder. It serves as a container for content such as text, images, or graphical objects.
+
+########
+
+Layout Placeholder
+A placeholder shape on a slide layout that defines the properties inherited by a placeholder shape on a slide. It acts as an intermediary, potentially inheriting from a master placeholder and passing properties to slide placeholders based on matching index (idx) values.
+
+########
+
+Master Placeholder
+A placeholder shape on a slide master that provides default properties to layout placeholders of the same type (e.g., Title, Body). It serves as the top-level source of inherited properties in the placeholder hierarchy, if present.
+
+########
+
+Auto Shapes
+Auto shapes are predefined, regular shapes in PowerPoint, such as squares, circles, triangles, stars, and more. They are highly customizable and form a core component of slide design.
+Key Features
+Variety: PowerPoint offers 182 distinct auto shapes, providing a wide range of design options.
+Adjustable Handles: 120 of these shapes feature adjustment handles (yellow diamond markers) that allow users to modify the shape’s appearance, often significantly (e.g., adjusting the corner radius of a rounded rectangle).
+Shared Properties: Auto shapes share common properties, including fill, outline, size, position, and the ability to contain text, ensuring consistent formatting and behavior across different shape types.
+
+########
+
+Text
+A shape's text is contained within its text frame, which defines properties such as vertical alignment, margins, text wrapping, auto-fit behavior, rotation angle, optional 3D visual effects, and the ability to format text into multiple columns. The text frame always contains a sequence of paragraphs, with at least one paragraph present, even if empty.
+
+########
+
+Paragraph
+A paragraph includes properties like line spacing, space before and after, bullet formatting, tab stops, outline/indentation level, and horizontal alignment. A paragraph may be empty, but if it contains text, that text is organized into one or more runs.

@@ -1,0 +1,54 @@
+[
+    {
+        "slide_number": 1,
+        "image_index": 1,
+        "coordinates": {
+            "left": 0.0,
+            "top": 105.01071166992188,
+            "width": 410.4857482910156,
+            "height": 293.6719665527344,
+            "total_width": 720.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/266/image_1.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 2,
+        "coordinates": {
+            "left": 180.04290771484375,
+            "top": 67.88566589355469,
+            "width": 81.0,
+            "height": 74.25,
+            "total_width": 720.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/266/image_2.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 3,
+        "coordinates": {
+            "left": 198.5569305419922,
+            "top": 318.4708557128906,
+            "width": 293.1000671386719,
+            "height": 221.5291290283203,
+            "total_width": 720.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/266/image_3.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 4,
+        "coordinates": {
+            "left": 410.4857482910156,
+            "top": 67.88566589355469,
+            "width": 300.04290771484375,
+            "height": 246.66598510742188,
+            "total_width": 720.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/266/image_4.png"
+    }
+]

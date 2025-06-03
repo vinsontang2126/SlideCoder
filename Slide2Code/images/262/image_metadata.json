@@ -1,0 +1,80 @@
+[
+    {
+        "slide_number": 1,
+        "image_index": 1,
+        "coordinates": {
+            "left": 66.0,
+            "top": 143.75,
+            "width": 810.126220703125,
+            "height": 342.6250305175781,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_1.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 2,
+        "coordinates": {
+            "left": 638.197265625,
+            "top": 344.72393798828125,
+            "width": 301.35205078125,
+            "height": 166.60842895507812,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_2.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 3,
+        "coordinates": {
+            "left": 26.36614227294922,
+            "top": 361.92047119140625,
+            "width": 298.8169250488281,
+            "height": 153.34228515625,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_3.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 4,
+        "coordinates": {
+            "left": 331.4366149902344,
+            "top": 362.19732666015625,
+            "width": 290.36614990234375,
+            "height": 148.5633087158203,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_4.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 5,
+        "coordinates": {
+            "left": 638.197265625,
+            "top": 166.81173706054688,
+            "width": 301.35205078125,
+            "height": 165.8131561279297,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_5.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 6,
+        "coordinates": {
+            "left": 26.36614227294922,
+            "top": 76.74243927001953,
+            "width": 595.4365234375,
+            "height": 280.03607177734375,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/262/image_6.png"
+    }
+]

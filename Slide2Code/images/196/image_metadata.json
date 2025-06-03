@@ -1,0 +1,28 @@
+[
+    {
+        "slide_number": 1,
+        "image_index": 1,
+        "coordinates": {
+            "left": 402.14471435546875,
+            "top": 47.86110305786133,
+            "width": 510.0262145996094,
+            "height": 287.01470947265625,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/196/image_1.png"
+    },
+    {
+        "slide_number": 1,
+        "image_index": 2,
+        "coordinates": {
+            "left": 65.18424987792969,
+            "top": 192.11849975585938,
+            "width": 507.52606201171875,
+            "height": 285.5146484375,
+            "total_width": 960.0,
+            "total_height": 540.0
+        },
+        "image_path": "images/196/image_2.png"
+    }
+]
