@@ -43,8 +43,8 @@ class GeneratedPPTsAgent:
         # Set the input directory
         self.ppt_images_dir = os.path.join(self.base_dir, folder_name)
         self.descriptions_dir = os.path.join(self.base_dir, f'output_{dataset}_{model_name}_rag{str(rag)}_layout{layout}_block{block}', 'descriptions', descriptions_dir)
-        self.images_dir=os.path.join(self.base_dir, f'images_{dataset}', ppt_images_dir)
-        self.background_dir=os.path.join(self.base_dir, f'background_{dataset}', ppt_images_dir)
+        self.images_dir=os.path.join("../Slide2Code/input", 'pics', ppt_images_dir)
+        self.background_dir=os.path.join("../Slide2Code/input", 'background', ppt_images_dir)
 
         # Create Output Directory
         self.output_dir = os.path.join(self.base_dir, f'output_{dataset}_{model_name}_rag{str(rag)}_layout{layout}_block{block}')

@@ -7,16 +7,6 @@ import requests
 import time
 from requests.exceptions import ConnectionError
 
-# 从环境变量获取 API 密钥
-api_key = ""
-if not api_key:
-    raise ValueError("环境变量中未找到 API 密钥")
-
-# 初始化 OpenAI 客户端
-client = openai.OpenAI(
-    api_key=api_key,
-    base_url="https://openkey.cloud/v1"
-)
 
 def get_embedding(prompt, client):
     for _ in range(10):

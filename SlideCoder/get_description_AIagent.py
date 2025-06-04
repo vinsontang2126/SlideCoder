@@ -26,17 +26,18 @@ class PPTDescriptionAgent:
             # Processing a single complete image
             image_path = os.path.join(folder_path, image_file, image_name)
             print(f"Processing image: {image_path}")
-            dir_name=image_path.split("/")[-3]
-            if dataset =="ours":
-                self.process_ppt_image(image_path, image_file, model_name, dir_name, block)
-            elif dataset == "slidebench":
-                self.process_ppt_image_slidebench(image_path, image_file, model_name, dir_name, block)
-            else:
-                raise ValueError("dataset don't exist")
+            dir_name = image_path.split("/")[-3]
+            # if dataset =="Slide2Code":
+            #     self.process_ppt_image(image_path, image_file, model_name, dir_name, block)
+            # elif dataset == "slidebench":
+            #     self.process_ppt_image_slidebench(image_path, image_file, model_name, dir_name, block)
+            # else:
+            #     raise ValueError("dataset don't exist")
+            self.process_ppt_image_slidebench(image_path, image_file, model_name, dir_name, block)
 
     def process_ppt_image(self, image_path, image_name, model_name, dir_name, ifblock):
         """Processing a single PPT image"""
-        description_json =f"../descriptions_gpt/{image_name}/{image_name}.json"
+        description_json =f"./descriptions_gpt/{image_name}/{image_name}.json"
         with open(description_json, 'r', encoding='utf-8') as file:
             description_data = json.load(file)
         
