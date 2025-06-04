@@ -1,10 +1,4 @@
-<p align="center">
-  <img src="icons/ppt.png" width="60" style="vertical-align: middle;" />
-  <span style="font-size: 24px; font-weight: bold;">SlideCoder: Layout-aware RAG-enhanced Hierarchical Slide Generation from Design</span>
-</p>
-
-
-
+![Logo](icons/title.png)
 
 ## 1. SlideMaster 🎓
 
